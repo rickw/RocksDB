@@ -33,6 +33,11 @@ public class DBIterator: IteratorProtocol {
     rocksdb_iter_destroy(iter)
   }
 
+  public func seekLast() {
+    guard rocksdb_iter_valid(iter) != 0 else { return }
+    rocksdb_iter_seek_to_last(iter)
+  }
+
   public func next() -> (DBEntry, DBEntry)? {
     guard rocksdb_iter_valid(iter) != 0 else { return nil }
 
